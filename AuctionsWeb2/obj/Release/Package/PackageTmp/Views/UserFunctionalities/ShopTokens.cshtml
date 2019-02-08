@@ -1,0 +1,57 @@
+﻿@model AuctionsWeb2.Models.ShopTokensModel
+@{
+    ViewBag.Title = "Shop Tokens";
+}
+
+<h2>@ViewBag.Title</h2>
+<p class="text-danger">@ViewBag.ErrorMessage</p>
+
+@using (Html.BeginForm("ShopTokens", "UserFunctionalities", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="jumbotron">
+        <h4>Choose your currency</h4>
+        @foreach (AuctionsWeb2.Enums.Currencies currency in Enum.GetValues(typeof(AuctionsWeb2.Enums.Currencies)))
+        {
+            <div class="form-check">
+                @if (currency == AuctionsWeb2.Constants.SystemParameters.DEFAULT_CURRENCY)
+                {
+                    @Html.RadioButtonFor(m => m.Currency, currency.ToString(), new { @checked = true })
+                    @Html.Label(currency.ToString())
+                }
+                else
+                {
+                    @Html.RadioButtonFor(m => m.Currency, currency.ToString())
+                    @Html.Label(currency.ToString())
+                }
+            </div>
+        }
+    </div>
+
+    <hr />
+    <div class="jumbotron">
+        <h4>Choose your token pack</h4>
+        <div class="form-check">
+            @Html.RadioButtonFor(m => m.NumTokens, 30)
+            @Html.Label("Silver - 30 tokens")
+        </div>
+        <div class="form-check">
+            @Html.RadioButtonFor(m => m.NumTokens, 50)
+            @Html.Label("Gold - 50 tokens")
+        </div>
+        <div class="form-check">
+            @Html.RadioButtonFor(m => m.NumTokens, 100)
+            @Html.Label("Platinum - 100 tokens")
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Next" class="btn btn-default" />
+        </div>
+    </div>
+
+}

@@ -1,0 +1,39 @@
+﻿@model AuctionsWeb2.Models.OpenAuctionsModel
+@{
+    ViewBag.Title = "Open Auction";
+}
+<h2>@ViewBag.Title</h2>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price Start</th>
+                <th scope="col">Time Created</th>
+                <th scope="col">Duration[s]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var auction in Model.auctions)
+            {
+                <tr>
+                    <td>@auction.Id</td>
+                    <td>@auction.Name</td>
+                    <td>@auction.PriceStart</td>
+                    <td>@auction.TimeCreate</td>
+                    <td>@auction.Duration</td>
+
+                    <td>
+                        <input type="button"
+                               value="Add"
+                               class="btn btn-success"
+                               onclick="location.href='@Url.Action("Add", "AdminFunctionalities", new { id = auction.Id })'" />
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

@@ -1,0 +1,44 @@
+﻿@model AuctionsWeb2.Models.WonAuctionsModel
+
+@{
+    ViewBag.Title = "My Winning Auctions";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Time End</th>
+                <th scope="col">Price End</th>
+                <th scope="col">State</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var auction in Model.auctions)
+            {
+                <tr>
+                    <td>@auction.Id</td>
+                    <td>@auction.Name</td>
+                    <td>@auction.Duration</td>
+                    <td>@auction.TimeEnd</td>
+                    <td>@auction.PriceEnd</td>
+                    <td>@auction.State</td>
+
+                    <td>
+                        <input type="button"
+                               value="Details"
+                               class="btn btn-primary"
+                               onclick="location.href='@Url.Action("AuctionDetails", "UserFunctionalities", new { idAuction = auction.Id })'" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

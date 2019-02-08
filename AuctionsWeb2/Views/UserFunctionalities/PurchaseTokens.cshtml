@@ -1,0 +1,44 @@
+﻿@model AuctionsWeb2.Models.PurchaseTokensModel
+@{
+    ViewBag.Title = "Purchase Tokens";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>Insert you purchase info</h4>
+<hr />
+
+
+
+@using (Html.BeginForm("PurchaseTokens", "UserFunctionalities", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="jumbotron row">
+        <dt class="col-sm-3 text-right">First Name: </dt>
+        <dd class="col-sm-9">@Model.FirstName</dd>
+
+        <dt class="col-sm-3 text-right">Last Name: </dt>
+        <dd class="col-sm-9">@Model.LastName</dd>
+
+        <dt class="col-sm-3 text-right">Amount of tokens: </dt>
+        <dd class="col-sm-9">@Model.NumTokens</dd>
+
+        <dt class="col-sm-3 text-right">Total Price: </dt>
+        <dd class="col-sm-9">@Model.TotalPrice</dd>
+    </div>
+
+
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.CreditCard, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.CreditCard, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Purchase" />
+        </div>
+    </div>
+
+}

@@ -1,0 +1,23 @@
+﻿@model ICollection<Bid>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Auction Name</th>
+            <th scope="col">UserName</th>
+            <th scope="col">Time of Bid</th>
+            <th scope="col">Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bid in Model)
+        {
+            <tr>
+                <td>@bid.Auction.Name</td>
+                <td>@bid.AspNetUser.UserName</td>
+                <td>@bid.Time</td>
+                <td>@bid.Amount</td>
+            </tr>
+        }
+    </tbody>
+</table>

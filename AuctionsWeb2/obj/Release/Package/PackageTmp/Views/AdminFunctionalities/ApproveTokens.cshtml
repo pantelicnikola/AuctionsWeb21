@@ -1,0 +1,43 @@
+﻿@model AuctionsWeb2.Models.ApproveTokensModel
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">IdUser</th>
+                <th scope="col">UserName</th>
+                <th scope="col">TokenNumber</th>
+                <th scope="col">Price</th>
+                <th scope="col">State</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.orders)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.IdUser</td>
+                    <td>@order.AspNetUser.UserName</td>
+                    <td>@order.NumTokens</td>
+                    <td>@order.Price</td>
+                    <td>@order.State</td>
+
+                    <td>
+                        <input type="button"
+                               value="Approve"
+                               class="btn btn-success"
+                               onclick="location.href='@Url.Action("Approve", "AdminFunctionalities", new { id = order.Id })'" />
+                    </td>
+                    <td>
+                        <input type="button"
+                               value="Cancel"
+                               class="btn btn-danger"
+                               onclick="location.href='@Url.Action("Cancel", "AdminFunctionalities", new { id = order.Id })'" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
