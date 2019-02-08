@@ -53,14 +53,15 @@ namespace AuctionsWeb2.Controllers
                 if (auction.State.Contains(AuctionStates.OPEN.ToString()) && auction.TimeEnd < DateTime.Now)
                 {
                     var db = new auctiondbEntities();
-                    auction.State = AuctionStates.CLOSED.ToString();
-                    var bids = auction.Bids.OrderByDescending(b => b.Time);
+                    var newAuction = db.Auctions.Where(a => a.Id == auction.Id).First();
+                    newAuction.State = AuctionStates.CLOSED.ToString();
+                    var bids = newAuction.Bids.OrderByDescending(b => b.Time);
                     if (bids.Any())
                     {
                         var winner = bids.First().AspNetUser;
-                        auction.Winner = winner.Id;
-                        auction.PriceEnd = auction.PriceNow;
-                        winner.NumTokens -= auction.TotalTokens;
+                        newAuction.Winner = winner.Id;
+                        newAuction.PriceEnd = newAuction.PriceNow;
+                        winner.NumTokens -= newAuction.TotalTokens;
                     }
                     db.SaveChanges();
                     auctionList.Remove(auction);
@@ -119,7 +120,7 @@ namespace AuctionsWeb2.Controllers
             var db = new auctiondbEntities();
             var user = db.AspNetUsers.Find(User.Identity.GetUserId());
             var auction = db.Auctions.First(a => a.Id == auctionId);
-            if (user.NumTokens >= model.numTokens)
+            if (user.NumTokens >= model.numTokens && model.numTokens > 0)
             {
                 var bid = new Bid()
                 {

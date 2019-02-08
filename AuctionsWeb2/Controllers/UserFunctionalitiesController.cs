@@ -40,9 +40,9 @@ namespace AuctionsWeb2.Controllers
                     TotalTokens = 0
                 };
 
-                var entity = new auctiondbEntities();
-                entity.Auctions.Add(auction);
-                await entity.SaveChangesAsync();
+                var db = new auctiondbEntities();
+                db.Auctions.Add(auction);
+                await db.SaveChangesAsync();
                 return Redirect("/");
             }
             return View();

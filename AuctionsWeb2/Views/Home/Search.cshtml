@@ -60,7 +60,6 @@
                 <input type="submit" value="Search" class="btn btn-default" />
             </div>
         </div>
-
     </div>
 }
 
@@ -101,37 +100,17 @@
                     }
                     @if (auction.State.Contains("OPEN"))
                     {
-                        @*<button id="btnSubmit" class="btn btn-primary btn-sm" data-target="#myModal" data-toggle="modal" onclick="
-                            $.ajax({
-                                url: '/Home/OpenModal' ,
-                                data: { auctionId: @auction.Id }
-                            });">Bid</button>*@
-                            using (Html.BeginForm("CreateBid", "Home", new { auctionId = auction.Id }, FormMethod.Post, null))
-                            {
-                                @Html.TextBoxFor(m => m.numTokens, new { @class = "form-control" })
-                                <input type = "submit" value = "Bid" class="btn btn-default" />
+                        using (Html.BeginForm("CreateBid", "Home", new { auctionId = auction.Id }, FormMethod.Post, null))
+                        {
+                            @Html.TextBoxFor(m => m.numTokens, new { @class = "form-control", autocomplete = "off", @Value = 1 })
+                            <input type = "submit" value = "Bid" class="btn btn-default" />
 
                         }
-
-                        @*<input type="text" value="1" id="bit-amount" name="bidAmount">
-                        <input type="button"
-                               value="Bid"
-                               class="btn btn-primary btn-sm"
-                               id="bid"
-                               onclick="location.href='@Url.Action("MakeBid", "Home", new { auctionId = auction.Id, numTokens = bidAmount })'" />*@
-
-                        @*<input type="button"
-                               value="Bid"
-                               class="btn btn-primary btn-sm"
-                               id="bid"/>*@
-
-
                     }
                     else
                     {
                         <button id="btnSubmit" class="btn btn-primary btn-sm disabled" data-target="#myModal" data-toggle="modal" disabled>Bid</button>
                     }
-
                 </div>
                 <div class="card-footer">
                     <h5 id="time-part">@timeLeft.ToString("hh\\:mm\\:ss")</h5>
@@ -188,8 +167,8 @@
                     hms = hh + ':' + mm + ':' + ss;
                     $(this).find('#time-part').get(0).innerHTML = hms;
                     if (seconds == 0) {
-                        $(this).find('#auction-state').html = 'CLOSED';
-
+                        //$(this).find('#auction-state').html = 'CLOSED';
+                        $(this).hide();
                     }
                 }
             });
@@ -197,7 +176,7 @@
 
         function addZero(asd) {
             if (asd < 10) {
-                asd += '0';
+                asd = '0' + asd;
             }
             return asd;
         }
