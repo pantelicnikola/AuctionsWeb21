@@ -57,7 +57,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Search" class="btn btn-default" />
+                <input type="submit" value="Search" class="btn btn-primary btn-sm" />
             </div>
         </div>
     </div>
@@ -103,7 +103,7 @@
                         using (Html.BeginForm("CreateBid", "Home", new { auctionId = auction.Id }, FormMethod.Post, null))
                         {
                             @Html.TextBoxFor(m => m.numTokens, new { @class = "form-control", autocomplete = "off", @Value = 1 })
-                            <input type = "submit" value = "Bid" class="btn btn-default" />
+                            <input type = "submit" value = "Bid" class="btn btn-primary btn-sm" />
 
                         }
                     }

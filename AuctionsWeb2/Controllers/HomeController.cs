@@ -114,7 +114,7 @@ namespace AuctionsWeb2.Controllers
             model.Auction = entity.Auctions.Single<Auction>(a => a.Id.Equals(id));
             return View(model);
         }
-
+        [Authorize]
         public ActionResult CreateBid(SearchViewModel model, int auctionId)
         {
             var db = new auctiondbEntities();

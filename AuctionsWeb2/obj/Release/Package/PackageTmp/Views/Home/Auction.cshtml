@@ -25,9 +25,9 @@
                     </div>
                     <img class="card-img-top" src="http://via.placeholder.com/277x200" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text">@Model.Auction.PriceNow</p>
-                        <p class="card-text">@lastBidder</p>
-                        <h5 class="card-title">@Model.Auction.State</h5>
+                        <p id="auction-price" class="card-text">@Model.Auction.PriceNow</p>
+                        <p id="auction-bidder" class="card-text">@lastBidder</p>
+                        <h5 id="auction-state" class="card-title">@Model.Auction.State</h5>
 
                         @{
                             TimeSpan timeLeft = TimeSpan.Zero;
@@ -100,9 +100,7 @@
         });
 
         function reduceSeconds() {
-            console.log($('#time-part'));
             var hms = $('#time-part')[0].innerHTML;
-            console.log(hms);
             if (hms != '00:00:00') {
                 var a = hms.split(':');
                 var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
@@ -111,9 +109,9 @@
                 var mm = addZero(Math.floor(((seconds % 3600) / 60)));
                 var ss = addZero(Math.floor((seconds % 60)));
                 hms = hh + ':' + mm + ':' + ss;
-                $(this).find('#time-part').get(0).innerHTML = hms;
+                $('#time-part')[0].innerHTML = hms;
                 if (seconds == 0) {
-                    $(this).remove();
+                    $('#auction-state').html('CLOSED');
                 }
             }
         }

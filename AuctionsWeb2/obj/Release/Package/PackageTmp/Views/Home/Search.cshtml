@@ -60,7 +60,6 @@
                 <input type="submit" value="Search" class="btn btn-default" />
             </div>
         </div>
-
     </div>
 }
 
@@ -101,36 +100,17 @@
                     }
                     @if (auction.State.Contains("OPEN"))
                     {
-                        @*<button id="btnSubmit" class="btn btn-primary btn-sm" data-target="#myModal" data-toggle="modal" onclick="
-                            $.ajax({
-                                url: '/Home/OpenModal' ,
-                                data: { auctionId: @auction.Id }
-                            });">Bid</button>*@
-                        @*@using (Html.BeginForm("CreateBid", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        using (Html.BeginForm("CreateBid", "Home", new { auctionId = auction.Id }, FormMethod.Post, null))
                         {
-                            @Html.TextBoxFor(m => m., new { @class = "form-control" })
-                            <input type="submit" value="Bid" class="btn btn-default" />
+                            @Html.TextBoxFor(m => m.numTokens, new { @class = "form-control", autocomplete = "off", @Value = 1 })
+                            <input type = "submit" value = "Bid" class="btn btn-default" />
 
-                        }*@
-
-                        <input type="button"
-                               value="Bid"
-                               class="btn btn-primary btn-sm"
-                               id="bid"
-                               onclick="location.href='@Url.Action("MakeBid", "Home", new { auctionId = auction.Id })'" />
-
-                        @*<input type="button"
-                               value="Bid"
-                               class="btn btn-primary btn-sm"
-                               id="bid"/>*@
-
-
+                        }
                     }
                     else
                     {
                         <button id="btnSubmit" class="btn btn-primary btn-sm disabled" data-target="#myModal" data-toggle="modal" disabled>Bid</button>
                     }
-
                 </div>
                 <div class="card-footer">
                     <h5 id="time-part">@timeLeft.ToString("hh\\:mm\\:ss")</h5>
@@ -139,14 +119,6 @@
         </div>
     }
 </div>
-
-@*<div id="myModal" class="modal fade hidden-print" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            @Html.Partial("BidModal");
-        </div>
-    </div>
-</div>*@
 
 @section Scripts{
 
@@ -160,21 +132,7 @@
 
             setInterval(reduceSeconds, 1000);
             var myHub = $.connection.myHub;
-            //myHub.client.hello = function () {
-            //    $('.card-deck').each(function () {
-            //        console.log('someone said hello');
-            //        var asd = $(this).find('#auction-price').html()
-            //        console.log(asd);
 
-            //        $('#auction-price').html('kurac');
-            //        //$('#auction-bidder').html() = 'picka';
-            //    });
-            //}
-            //$.connection.hub.start().done(function () {
-            //    $('#bid').click(function () {
-            //        myHub.server.hello();
-            //    });
-            //});
             myHub.client.announceBid = function (auctionName, username, newValue) {
                 console.log('response from server: ' + auctionName + ' ' + username + ' ' + newValue);
                 $('.card-deck').each(function () {
@@ -194,23 +152,6 @@
                     myHub.server.announceBid(auctionName, username, newValue);
                 });
             });
-            //myHub.client.test = function (text) {
-            //    console.log(text);
-            //}
-            //$.connection.hub.start().done(function () {
-            //    $('#bid').click(function () {
-            //        var asd = $(this).parent().find('#auction-bidder').html();
-            //        myHub.server.test(asd);
-            //    });
-            //});
-
-            //$('#bid').click(function () {
-            //    var asd = $(this).parent().find('#auction-bidder').html();
-            //    var sdf = $(this).parent().parent().find('a').html();
-            //    var username = $('#logoutForm').find('a').html();
-            //    username = username.substring(6, username.length - 1);
-            //    console.log(username);
-            //});
         });
 
         function reduceSeconds() {
@@ -226,7 +167,8 @@
                     hms = hh + ':' + mm + ':' + ss;
                     $(this).find('#time-part').get(0).innerHTML = hms;
                     if (seconds == 0) {
-                        $(this).remove();
+                        //$(this).find('#auction-state').html = 'CLOSED';
+                        $(this).hide();
                     }
                 }
             });
