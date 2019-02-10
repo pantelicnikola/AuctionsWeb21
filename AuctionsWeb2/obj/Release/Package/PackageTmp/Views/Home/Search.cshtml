@@ -57,7 +57,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Search" class="btn btn-default" />
+                <input type="submit" value="Search" class="btn btn-primary btn-sm" />
             </div>
         </div>
     </div>
@@ -103,7 +103,7 @@
                         using (Html.BeginForm("CreateBid", "Home", new { auctionId = auction.Id }, FormMethod.Post, null))
                         {
                             @Html.TextBoxFor(m => m.numTokens, new { @class = "form-control", autocomplete = "off", @Value = 1 })
-                            <input type = "submit" value = "Bid" class="btn btn-default" />
+                            <input id="bid" type = "submit" value = "Bid" class="btn btn-primary btn-sm" />
 
                         }
                     }
@@ -146,9 +146,10 @@
                 $('#bid').click(function () {
                     var username = $('#logoutForm').find('a').html();
                     username = username.substring(6, username.length - 1);
-                    var auctionName = $(this).parent().parent().find('a').html();
-                    var newValue = $(this).parent().find('#auction-price').html()
-                    newValue = parseFloat(newValue) + ( 1.0 * 10.0 );
+                    var auctionName = $(this).parent().parent().parent().find('a').html();
+                    var newValue = $(this).parent().parent().find('#auction-price').html();
+                    var numTokens = $('#numTokens').val();
+                    newValue = parseFloat(newValue) + ( numTokens * 10.0 );
                     myHub.server.announceBid(auctionName, username, newValue);
                 });
             });
