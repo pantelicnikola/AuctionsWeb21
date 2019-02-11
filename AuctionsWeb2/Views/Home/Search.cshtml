@@ -103,7 +103,7 @@
                         using (Html.BeginForm("CreateBid", "Home", new { auctionId = auction.Id }, FormMethod.Post, null))
                         {
                             @Html.TextBoxFor(m => m.numTokens, new { @class = "form-control", autocomplete = "off", @Value = 1 })
-                            <input id="bid" type = "submit" value = "Bid" class="btn btn-primary btn-sm" />
+                            <input type = "submit" value = "Bid" class="bid btn btn-primary btn-sm" />
 
                         }
                     }
@@ -135,15 +135,16 @@
 
             myHub.client.announceBid = function (auctionName, username, newValue) {
                 console.log('response from server: ' + auctionName + ' ' + username + ' ' + newValue);
-                $('.card-deck').each(function () {
-                    if (auctionName.trim() == $('.card-deck').find('a').html().trim()) {
-                        $('#auction-price').html(newValue);
-                        $('#auction-bidder').html(username);
+                $('.card').each(function () {
+                    if (auctionName.trim() == $(this).find('a').html().trim()) {
+                        $(this).find('#auction-price').html(newValue);
+                        $(this).find('#auction-bidder').html(username);
+                        //break from each
                     }
                 });
             }
             $.connection.hub.start().done(function () {
-                $('#bid').click(function () {
+                $('.bid').click(function () {
                     var username = $('#logoutForm').find('a').html();
                     username = username.substring(6, username.length - 1);
                     var auctionName = $(this).parent().parent().parent().find('a').html();
