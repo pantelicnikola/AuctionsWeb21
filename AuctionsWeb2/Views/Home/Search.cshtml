@@ -133,27 +133,46 @@
             setInterval(reduceSeconds, 1000);
             var myHub = $.connection.myHub;
 
-            myHub.client.announceBid = function (auctionName, username, newValue) {
+            myHub.client.announceBid = function (auctionName, username, newValue, numTokens) {
                 console.log('response from server: ' + auctionName + ' ' + username + ' ' + newValue);
                 $('.card').each(function () {
                     if (auctionName.trim() == $(this).find('a').html().trim()) {
                         $(this).find('#auction-price').html(newValue);
                         $(this).find('#auction-bidder').html(username);
                         //break from each
+                        return false;
                     }
                 });
             }
+            $.connection.hub.start().
+                done(function () {
+                    $('.bid').click(function () {
+                        var username = $('#logoutForm').find('a').html();
+                        username = username.substring(6, username.length - 1);
+                        var auctionName = $(this).parent().parent().parent().find('a').html();
+                        var newValue = $(this).parent().parent().find('#auction-price').html();
+                        var numTokens = $('#numTokens').val();
+                        newValue = parseFloat(newValue) + ( numTokens * 10.0 );
+                        myHub.server.announceBid(auctionName, username, newValue, numTokens);
+                    });
+                })
+                .fail(function() {
+                    console.log('MyHub connection failed');
+                });
+
             $.connection.hub.start().done(function () {
                 $('.bid').click(function () {
-                    var username = $('#logoutForm').find('a').html();
-                    username = username.substring(6, username.length - 1);
-                    var auctionName = $(this).parent().parent().parent().find('a').html();
-                    var newValue = $(this).parent().parent().find('#auction-price').html();
-                    var numTokens = $('#numTokens').val();
-                    newValue = parseFloat(newValue) + ( numTokens * 10.0 );
-                    myHub.server.announceBid(auctionName, username, newValue);
+                    myHub.server.hello();
                 });
             });
+
+            myHub.client.hello = function () {
+                console.log('hello');
+            }
+
+
+
+
         });
 
         function reduceSeconds() {

@@ -82,22 +82,49 @@
 @section Scripts{
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
     <script src="~/signalr/hubs"></script>
 
     <script type="text/javascript">
         $(function () {
-            var myHub = $.connection.myHub;
 
             setInterval(reduceSeconds, 1000);
+            var myHub = $.connection.myHub;
 
-            myHub.client.announceBid = function (auctionName, username, newValue) {
-                if (auctionName.trim() == $(this).find('a').html().trim()) {
+            myHub.client.announceBid = function (auctionName, username, newValue, numTokens) {
+                console.log('idemo');
+                if (auctionName.trim() == $('.card-header').html().trim()) {
+                    console.log('asasdasdas');
                     $('#auction-price').html(newValue);
                     $('#auction-bidder').html(username);
+
+                    var currDate = new Date($.now());
+                    var dateString = $.datepicker.formatDate('dd-M-y', currDate);
+                    dateString = dateString + ' ' + currDate.getHours() + ':' + currDate.getMinutes() + ':' + currDate.getSeconds() + ' ';
+                    //var nesto = $.datepicker.formatDate('dd-M-y HH:mm:SS A', new Date($.now()));
+                    //console.log(nesto);
+
+                    // append data to table
+                    $('.table tr:last').after(
+                        '<tr>' +
+                            '<td>' + auctionName + '</td>' +
+                            '<td>' + username + '</td>' +
+                            '<td>' + dateString + '</td>' +
+                            '<td>' + numTokens + '</td>' +
+                        '</tr>'
+                    );
                 }
             }
+
+            myHub.client.hello = function () {
+                console.log('hello');
+            }
+
+            $.connection.hub.start().done(function () {
+            });
         });
+        
 
         function reduceSeconds() {
             var hms = $('#time-part')[0].innerHTML;

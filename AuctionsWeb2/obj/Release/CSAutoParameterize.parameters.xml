@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=EB-K0054;Initial Catalog=auctiondb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\Nikola\ Pantelic\\Desktop\\IEP\\AuctionsWeb21\\AuctionsWeb2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Nikola\ Pantelic\\Desktop\\IEP1\\AuctionsWeb2\\AuctionsWeb2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
   <parameter name="auctiondbEntities-Web.config Connection String" description="auctiondbEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=EB-K0054;initial catalog=auctiondb;integrated security=True;connect timeout=30;encrypt=False;trustservercertificate=True;applicationintent=ReadWrite;multisubnetfailover=False;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\Nikola\ Pantelic\\Desktop\\IEP\\AuctionsWeb21\\AuctionsWeb2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='auctiondbEntities']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Nikola\ Pantelic\\Desktop\\IEP1\\AuctionsWeb2\\AuctionsWeb2\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='auctiondbEntities']/@connectionString" />
   </parameter>
 </parameters>

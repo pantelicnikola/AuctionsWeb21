@@ -1,5 +1,6 @@
 ﻿using AuctionsWeb2.Constants;
 using AuctionsWeb2.Enums;
+using AuctionsWeb2.Hubs;
 using AuctionsWeb2.Models;
 using Microsoft.AspNet.Identity;
 using System;
@@ -138,6 +139,7 @@ namespace AuctionsWeb2.Controllers
 
                 db.SaveChanges();
                 ViewBag.ErrorMessage = "Success";
+                MyHub.Hello();
                 //AuctionViewModel auctionViewModel = new AuctionViewModel() { Auction = auction };
                 return RedirectToAction("Auction", new { id = auction.Id } );
             }

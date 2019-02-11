@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="C:\Users\Nikola Pantelic\Desktop\IEP\AuctionsWeb21\AuctionsWeb2\obj\Release\Package\PackageTmp" />
-  <setAcl path="C:\Users\Nikola Pantelic\Desktop\IEP\AuctionsWeb21\AuctionsWeb2\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="C:\Users\Nikola Pantelic\Desktop\IEP\AuctionsWeb21\AuctionsWeb2\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+  <IisApp path="C:\Users\Nikola Pantelic\Desktop\IEP1\AuctionsWeb2\AuctionsWeb2\obj\Release\Package\PackageTmp" />
+  <setAcl path="C:\Users\Nikola Pantelic\Desktop\IEP1\AuctionsWeb2\AuctionsWeb2\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="C:\Users\Nikola Pantelic\Desktop\IEP1\AuctionsWeb2\AuctionsWeb2\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
 </sitemanifest>

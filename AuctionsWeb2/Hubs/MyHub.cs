@@ -8,9 +8,16 @@ namespace AuctionsWeb2.Hubs
 {
     public class MyHub : Hub
     {
-        public void AnnounceBid(string auctionName, string username, string newValue)
+        public void AnnounceBid(string auctionName, string username, string newValue, string numTokens)
         {
-            Clients.All.announceBid(auctionName, username, newValue);
+            IHubContext hc = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
+            hc.Clients.All.announceBid(auctionName, username, newValue, numTokens);
+        }
+
+        public static void Hello()
+        {
+            IHubContext hc = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
+            hc.Clients.All.hello();
         }
     }
 }
